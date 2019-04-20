@@ -1,0 +1,148 @@
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-transition:all .5;
+    transition:all .5;
+}
+.swiper-container {
+    position: relative;
+    width:100%;
+    height:1250px;
+}
+
+.money {
+    position: absolute;
+    /* top: 377px; */
+    top:30px;
+    left: 277px;
+    width: 64px;
+    height: 79px;
+    background: transparent url(./image/money.png) no-repeat center center;
+    background-size: cover;
+    z-index: 2;
+}
+
+.person {
+    position: absolute;
+    top: 395px;
+    left: 80px;
+    width: 102px;
+    height: 155px;
+    background: transparent url(./image/person1.png) no-repeat center center;
+    background-size: cover;
+}
+
+/* .person .string {
+    position: absolute;
+    top: 68px;
+    left: 0;
+    width: 34px;
+    height: 65px;
+    z-index: -1;
+    background: transparent url(./image/string.png) no-repeat center center;
+    background-size: cover;
+} */
+
+.seesaw1 {
+    position: absolute;
+    top: 416px;
+    left: 116px;
+    width: 234.5px;
+    height: 114px;
+    background: transparent url(./image/seesaw-straight.png) no-repeat center center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.seesaw2 {
+    position: absolute;
+    top: 445px;
+    left: 125px;
+    width: 225.5px;
+    height: 92px;
+    background: transparent url(./image/seesaw-bend.png) no-repeat center center;
+    background-size: cover;
+    opacity: 0;
+    z-index: -1;
+}
+.cloud{
+    position: absolute;
+    top: 503px;
+    left: 160px;
+    width: 180px;
+    height: 80px;
+    background: transparent url(./image/cloud.png) no-repeat center center;
+    background-size: cover;
+}
+.tower1{
+    position: absolute;
+    top: 546px;
+    left: 26px;
+    width: 85px;
+    height: 116.5px;
+    background: transparent url(./image/tower-straight.png) no-repeat center center;
+    background-size: cover;
+}
+.tower2{
+    position: absolute;
+    top: 536px;
+    left: 30px;
+    width: 106px;
+    height: 124px;
+    background: transparent url(./image/tower-bend.png) no-repeat center center;
+    background-size: cover;
+   
+}
+.talk{
+    position: absolute;
+    top: 99px;
+    left: 88px;
+    width: 198.5px;
+    height: 298.5px;
+    background: transparent url(./image/talk.png) no-repeat center center;
+    background-size: cover;
+    -webkit-transform: scale(0);
+            transform: scale(0);
+}
+.line{
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 335px;
+    height: 4px;
+    background: transparent url(./image/line.png) no-repeat center center;
+    background-size: cover;
+}
+.talk2{
+    position: absolute;
+    top: 55px;
+    left: 225px;
+    width: 16.5px;
+    height: 205px;
+    background: transparent url(./image/talk2.png) no-repeat center center;
+    background-size: cover;
+}
+.person2{
+    position: absolute;
+    top: 330px;
+    left: 101px;
+    width: 132.5px;
+    height: 150px;
+    background: transparent url(./image/person2.png) no-repeat center center;
+    background-size: cover;
+    z-index:2;
+}
+
+.weigh-bridge{
+    position: absolute;
+    top: 450px;
+    left: 78px;
+    width: 275px;
+    height: 173px;
+    background: transparent url(./image/weigh-bridge.png) no-repeat center center;
+    background-size: cover;
+}
+
+ 

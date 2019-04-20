@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 设置缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
+    <!-- 可隐藏地址栏，仅针对IOS的Safari（注：IOS7.0版本以后，safari上已看不到效果） -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 仅针对IOS的Safari顶端状态条的样式（可选default/black/black-translucent ） -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- IOS中禁用将数字识别为电话号码/忽略Android平台中对邮箱地址的识别 -->
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <title>车勇志作品</title>
+    <script>
+        window.loadingStartTime = new Date()
+    </script>
+    <script>
+        ;
+        (function (win, lib) {
+            var doc = win.document;
+            var docEl = doc.documentElement;
+            var metaEl = doc.querySelector('meta[name="viewport"]');
+            var flexibleEl = doc.querySelector('meta[name="flexible"]');
+            var dpr = 0;
+            var scale = 0;
+            var tid;
+            var flexible = lib.flexible || (lib.flexible = {});
+
+            if (metaEl) {
+                console.warn('将根据已有的meta标签来设置缩放比例');
+                var match = metaEl.getAttribute('content').match(/initial\-scale=([\d\.]+)/);
+                if (match) {
+                    scale = parseFloat(match[1]);
+                    dpr = parseInt(1 / scale);
+                }
+            } else if (flexibleEl) {
+                var content = flexibleEl.getAttribute('content');
+                if (content) {
+                    var initialDpr = content.match(/initial\-dpr=([\d\.]+)/);
+                    var maximumDpr = content.match(/maximum\-dpr=([\d\.]+)/);
+                    if (initialDpr) {
+                        dpr = parseFloat(initialDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                    if (maximumDpr) {
+                        dpr = parseFloat(maximumDpr[1]);
+                        scale = parseFloat((1 / dpr).toFixed(2));
+                    }
+                }
+            }
+
+            if (!dpr && !scale) {
+                var isAndroid = win.navigator.appVersion.match(/android/gi);
+                var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+                var devicePixelRatio = win.devicePixelRatio;
+                if (isIPhone) {
+                    // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+                    if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
+                        dpr = 3;
+                    } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
+                        dpr = 2;
+                    } else {
+                        dpr = 1;
+                    }
+                } else {
+                    // 其他设备下，仍旧使用1倍的方案
+                    dpr = 1;
+                }
+                scale = 1 / dpr;
+            }
+
+            docEl.setAttribute('data-dpr', dpr);
+            if (!metaEl) {
+                metaEl = doc.createElement('meta');
+                metaEl.setAttribute('name', 'viewport');
+                metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale +
+                    ', minimum-scale=' + scale + ', user-scalable=no');
+                if (docEl.firstElementChild) {
+                    docEl.firstElementChild.appendChild(metaEl);
+                } else {
+                    var wrap = doc.createElement('div');
+                    wrap.appendChild(metaEl);
+                    doc.write(wrap.innerHTML);
+                }
+            }
+
+            function refreshRem() {
+                var width = docEl.getBoundingClientRect().width;
+                if (width / dpr > 540) {
+                    width = 540 * dpr;
+                }
+                var rem = width / 10;
+                docEl.style.fontSize = rem + 'px';
+                flexible.rem = win.rem = rem;
+            }
+
+            win.addEventListener('resize', function () {
+                clearTimeout(tid);
+                tid = setTimeout(refreshRem, 300);
+            }, false);
+            win.addEventListener('pageshow', function (e) {
+                if (e.persisted) {
+                    clearTimeout(tid);
+                    tid = setTimeout(refreshRem, 300);
+                }
+            }, false);
+
+            if (doc.readyState === 'complete') {
+                doc.body.style.fontSize = 12 * dpr + 'px';
+            } else {
+                doc.addEventListener('DOMContentLoaded', function (e) {
+                    doc.body.style.fontSize = 12 * dpr + 'px';
+                }, false);
+            }
+
+
+            refreshRem();
+
+            flexible.dpr = win.dpr = dpr;
+            flexible.refreshRem = refreshRem;
+            flexible.rem2px = function (d) {
+                var val = parseFloat(d) * this.rem;
+                if (typeof d === 'string' && d.match(/rem$/)) {
+                    val += 'px';
+                }
+                return val;
+            }
+            flexible.px2rem = function (d) {
+                var val = parseFloat(d) / this.rem;
+                if (typeof d === 'string' && d.match(/px$/)) {
+                    val += 'rem';
+                }
+                return val;
+            }
+
+        })(window, window['lib'] || (window['lib'] = {}));
+    </script>
+    <style>
+        .loading {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #fff;
+            z-index: 110;
+        }
+
+        .loading.complete {
+            -webkit-animation: loading-anim .5s both;
+            animation: loading-anim .5s both
+        }
+
+        .loading .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            margin-top: 1.86667rem;
+            width: 100%;
+            color: #ff1224;
+            font-size: .24rem;
+            text-align: center
+        }
+
+        .loading .c-cube {
+            font-size: .8rem;
+            -webkit-transform: rotateX(-33.5deg) rotateY(45deg);
+            transform: rotateX(-33.5deg) rotateY(45deg);
+            -webkit-transform-origin: .5em .5em;
+            transform-origin: .5em .5em;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-animation: spin-cube-right 1.2s linear infinite;
+            animation: spin-cube-right 1.2s linear infinite;
+        }
+
+        @-webkit-keyframes spin-cube-right {
+            0% {
+                -webkit-transform: rotateX(-33.5deg) rotateY(45deg);
+                transform: rotateX(-33.5deg) rotateY(45deg)
+            }
+
+            to {
+                -webkit-transform: rotateX(-33.5deg) rotateY(225deg);
+                transform: rotateX(-33.5deg) rotateY(225deg)
+            }
+        }
+
+        @keyframes spin-cube-right {
+            0% {
+                -webkit-transform: rotateX(-33.5deg) rotateY(45deg);
+                transform: rotateX(-33.5deg) rotateY(45deg)
+            }
+
+            to {
+                -webkit-transform: rotateX(-33.5deg) rotateY(225deg);
+                transform: rotateX(-33.5deg) rotateY(225deg)
+            }
+        }
+
+        .loading .c-cube__side {
+            height: 1em;
+            position: absolute;
+            width: 1em
+        }
+
+        .loading .c-cube__side--left,
+        .loading .c-cube__side--right {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border: 1px solid;
+            -o-border-image: linear-gradient(#ff1224, rgba(255, 18, 36, 0)) 2 100%;
+            border-image: -webkit-gradient(linear, left top, left bottom, from(#ff1224), to(rgba(255, 18, 36, 0))) 2 100%;
+            border-image: linear-gradient(#ff1224, rgba(255, 18, 36, 0)) 2 100%;
+            border-top: none;
+            border-bottom: none;
+            height: 5em
+        }
+
+        .loading .c-cube__side--back,
+        .loading .c-cube__side--front {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border: 1px solid;
+            -o-border-image: linear-gradient(#ff1224, rgba(255, 18, 36, 0)) 2 100%;
+            border-image: -webkit-gradient(linear, left top, left bottom, from(#ff1224), to(rgba(255, 18, 36, 0))) 2 100%;
+            border-image: linear-gradient(#ff1224, rgba(255, 18, 36, 0)) 2 100%;
+            border-top: none;
+            border-bottom: none;
+            height: 5em
+        }
+
+        .loading .c-cube__side--front {
+            -o-border-image: linear-gradient(180deg, #ff1224, rgba(255, 18, 36, 0)) 2 100%;
+            border-image: -webkit-gradient(linear, left top, left bottom, from(#ff1224), to(rgba(255, 18, 36, 0))) 2 100%;
+            border-image: linear-gradient(180deg, #ff1224, rgba(255, 18, 36, 0)) 2 100%
+        }
+
+        .loading .c-cube__side--bottom,
+        .loading .c-cube__side--top {
+            border: 1px solid #ff1224;
+            background: #fff
+        }
+
+        .loading .c-cube__side--front {
+            -webkit-transform: translateZ(.5em);
+            transform: translateZ(.5em)
+        }
+
+        .loading .c-cube__side--back {
+            -webkit-transform: translateZ(-.5em);
+            transform: translateZ(-.5em)
+        }
+
+        .loading .c-cube__side--right {
+            -webkit-transform: rotateY(90deg) translateZ(.5em);
+            transform: rotateY(90deg) translateZ(.5em)
+        }
+
+        .loading .c-cube__side--left {
+            -webkit-transform: rotateY(-90deg) translateZ(.5em);
+            transform: rotateY(-90deg) translateZ(.5em)
+        }
+
+        .loading .c-cube__side--top {
+            -webkit-transform: rotateX(90deg) translateZ(.5em);
+            transform: rotateX(90deg) translateZ(.5em)
+        }
+
+        .loading .c-cube-1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -2.13333rem;
+            margin-left: -.4rem;
+            -webkit-animation: cube-up-down-1 .8s ease-in-out infinite alternate;
+            animation: cube-up-down-1 .8s ease-in-out infinite alternate;
+        }
+
+        @-webkit-keyframes cube-up-down-1 {
+            0% {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0)
+            }
+
+            to {
+                -webkit-transform: translate3d(0, -.4rem, 0);
+                transform: translate3d(0, -.4rem, 0)
+            }
+        }
+
+        @keyframes cube-up-down-1 {
+            0% {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0)
+            }
+
+            to {
+                -webkit-transform: translate3d(0, -.4rem, 0);
+                transform: translate3d(0, -.4rem, 0)
+            }
+        }
+
+        .loading .c-cube-3,
+        .loading .line {
+            position: absolute;
+            top: 50%;
+            left: 50%
+        }
+
+        .loading .line {
+            width: 1px;
+            height: 1.33333rem;
+            background: -webkit-gradient(linear, left top, left bottom, from(#ff1224), to(rgba(255, 18, 36, 0)));
+            background: linear-gradient(-180deg, #ff1224, rgba(255, 18, 36, 0));
+            -webkit-animation: speed-line-anim 1.2s linear infinite both;
+            animation: speed-line-anim 1.2s linear infinite both
+        }
+
+        @-webkit-keyframes speed-line-anim {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0)
+            }
+
+            20% {
+                opacity: 1;
+                -webkit-transform: translate3d(0, 40%, 0);
+                transform: translate3d(0, 40%, 0)
+            }
+
+            to {
+                opacity: 0;
+                -webkit-transform: translate3d(0, 200%, 0);
+                transform: translate3d(0, 200%, 0)
+            }
+        }
+
+        @keyframes speed-line-anim {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0)
+            }
+
+            20% {
+                opacity: 1;
+                -webkit-transform: translate3d(0, 40%, 0);
+                transform: translate3d(0, 40%, 0)
+            }
+
+            to {
+                opacity: 0;
+                -webkit-transform: translate3d(0, 200%, 0);
+                transform: translate3d(0, 200%, 0)
+            }
+        }
+
+
+        .loading .line-1 {
+            margin-top: -2.4rem;
+            margin-left: -1.33333rem;
+            -webkit-animation-delay: .2s;
+            animation-delay: .2s;
+            -webkit-animation-duration: 1.5s;
+            animation-duration: 1.5s
+        }
+
+        .loading .line-2 {
+            margin-left: -.8rem;
+            margin-top: -2.13333rem;
+            -webkit-animation-delay: .1s;
+            animation-delay: .1s;
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s
+        }
+
+        .loading .line-3 {
+            margin-left: .4rem;
+            margin-top: -1.86667rem;
+            -webkit-animation-delay: .6s;
+            animation-delay: .6s;
+            -webkit-animation-duration: 1.4s;
+            animation-duration: 1.4s
+        }
+
+        .loading .line-4 {
+            margin-left: 1.06667rem;
+            margin-top: -2.4rem;
+            -webkit-animation-delay: .8s;
+            animation-delay: .8s
+        }
+
+
+    </style>
+    <link rel="stylesheet" href="./static/swiper.min.css">
+    <link rel="stylesheet" href="./static/animate.css">
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div class="swiper-container" id="app">
+        <div class="swiper-wrapper">
+            <div class="first swiper-slide">
+                <div class="money"></div>
+                <div class="person"></div>
+                <div class="seesaw1"></div>
+                <div class="seesaw2"></div>
+                <div class="cloud"></div>
+                <div class="tower1"></div>
+                <div class="tower2"></div>
+                <div class="talk"></div>
+            </div>
+            <div class="second swiper-slide">
+                <div class="line"></div>
+                <div class="talk2"></div>
+                <div class="person2"></div>
+                <div class="weigh-bridge"></div>
+            </div>
+        </div>
+    </div>
+    <div class="loading" id="J-loading">
+        <div class="c-cube-1">
+            <div class="c-cube">
+                <div class="c-cube__side c-cube__side--front"></div>
+                <div class="c-cube__side c-cube__side--back"></div>
+                <div class="c-cube__side c-cube__side--right"></div>
+                <div class="c-cube__side c-cube__side--left"></div>
+                <div class="c-cube__side c-cube__side--top"></div>
+            </div>
+        </div>
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+        <div class="line line-3"></div>
+        <div class="line line-4"></div>
+        <p class="progress-text origin-font" id="J-progress-text">0%</p>
+    </div>
+    <script src="./static/jquery.min.js"></script>
+    <script src="./static/swiper.min.js"></script>
+    <script src="./static/hammer.min.js"></script>
+    <script src="./index.js"></script>
+</body>
+
+</html>
