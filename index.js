@@ -138,7 +138,8 @@
             mark = null;
         }
         // ev.distance < 500
-        if (/350/.test(mark) && ev.deltaY < 0) {
+        // if (/350/.test(mark) && ev.deltaY < 0) {
+        if (/3/.test(mark) && ev.deltaY < 0) {
             towerS.addClass("tada animated");
             seesawB.addClass("swing animated");
             towerB.fadeIn("slow");
@@ -153,7 +154,8 @@
             clearTimeout(isSwipe);
             isSwipe = setTimeout(swipe, 500);
             key = true
-        } else if (/350/.test(mark) && ev.deltaY > 0) {
+        // } else if (/350/.test(mark) && ev.deltaY > 0) {
+        } else if (/3/.test(mark) && ev.deltaY > 0) {
             towerS.addClass("tada animated");
             seesawB.addClass("swing animated");
             towerB.fadeOut("slow");
