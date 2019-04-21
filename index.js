@@ -1,4 +1,8 @@
 !(function () {
+    var heightc = window.screen.height
+    var widthc = window.screen.width
+    console.log({heightc},{widthc})
+    /* 样式兼容 */
     // document.body.style.overflow = 'hidden'
     var $loading = $("#J-loading");
     var $progress = $("#J-progress-text");
@@ -195,18 +199,18 @@
                         // this.allowSlidePrev = true
                         this.allowSlideNext = false;
                         this.allowSlidePrev = true;
-                        talk2.css({
+                        talk2.fadeIn('fast').css({
                             'transform': 'translate3d(0px,650px,0px)',
                             'transition': 'transform 2s'
                         });
-                        line.css({
+                        line.fadeIn('fast').css({
                             'transform': 'translate3d(0px,586px,0px)',
                             'transition': 'transform 1s'
                         });
-                        person2.css({
+                        person2.fadeIn('fast').css({
                             'transform': 'translate3d(0px,830px,0px) rotate(1turn)',
                             'transition': 'transform 2s'
-                        })
+                        });
                         setTimeout(function () {
                             num.fadeIn('fast')
                         }, 2200)
@@ -219,15 +223,15 @@
                         talk2.css({
                             'transform': 'translate3d(0px,0px,0px)',
                             'transition': 'transform 2s'
-                        });
+                        }).fadeOut(2000);
                         line.css({
                             'transform': 'translate3d(0px,0px,0px)',
                             'transition': 'transform 1s'
-                        });
+                        }).fadeOut(2000);
                         person2.css({
                             'transform': 'translate3d(0px,0px,0px) rotate(-1turn)',
                             'transition': 'transform 2s'
-                        })
+                        }).fadeOut(2000)
                         setTimeout(function () {
                             num.fadeOut('fast')
                         }, 2200)
