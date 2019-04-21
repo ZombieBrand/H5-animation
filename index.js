@@ -130,6 +130,7 @@
             seesawB.css("opacity", "1");
             time = setTimeout(function () {
                 mark = money.css("transform");
+                console.log(mark)
             }, 1000);
         } else if (dY < 320 && ev.deltaY > 0) {
             seesawS.css("opacity", "1");
