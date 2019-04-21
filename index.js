@@ -1,7 +1,15 @@
 !(function () {
     var heightc = window.screen.height
     var widthc = window.screen.width
-    console.log({heightc},{widthc})
+    var ua = navigator.userAgent
+    if (ua.match(/MicroMessenger/i) === 'micromessenger') {
+        console.log('微信')
+    }
+    console.log({
+        heightc
+    }, {
+        widthc
+    })
     /* 样式兼容 */
     // document.body.style.overflow = 'hidden'
     var $loading = $("#J-loading");
@@ -154,7 +162,7 @@
             clearTimeout(isSwipe);
             isSwipe = setTimeout(swipe, 500);
             key = true
-        // } else if (/350/.test(mark) && ev.deltaY > 0) {
+            // } else if (/350/.test(mark) && ev.deltaY > 0) {
         } else if (/3/.test(mark) && ev.deltaY > 0) {
             towerS.addClass("tada animated");
             seesawB.addClass("swing animated");
