@@ -7,10 +7,10 @@
     transition: all .5;
 }
 
-body {
+/* body {
     margin-bottom: constant(safe-area-inset-bottom);
     margin-bottom: env(safe-area-inset-bottom);
-}
+} */
 
 .swiper-container {
     position: relative;
