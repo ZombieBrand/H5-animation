@@ -215,8 +215,7 @@
                             'transition': 'transform 2s'
                         });
                         line.fadeIn('fast').css({
-                            // 'transform': 'translate3d(0px,15.62666rem,0px)',
-                            'transform': 'translate3d(0px,17.3333rem,0px)',
+                            'transform': 'translate3d(0px,15.62666rem,0px)',
                             'transition': 'transform 1s'
                         });
                         person2.fadeIn('fast').css({
