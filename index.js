@@ -1,28 +1,38 @@
 !(function () {
-    // //获取设备宽高
-    // var heightc = window.screen.height
-    // var widthc = window.screen.width
-    // console.log({
-    //     heightc
-    // }, {
-    //     widthc
-    // })
-    // // 获取是否微信
-    // var ua = /MicroMessenger/.test(navigator.userAgent)
-    // //计算长宽比保留1位小数
-    // var ratio = (heightc / widthc).toFixed(1)
-    // //获取htmlfont-size
-    // var htmlFont = $('html').css('font-size').match(/^\d+.\d/)[0]
-    // //64px
-    // var heightR = 64 / htmlFont
-    // console.log(heightR)
-    // var abc = $('.abc')
-    // if (ua === true && heightc > 720) {
-    //     console.log('是微信')
-    //     abc.css('height', heightR + 'rem')
-    // } else if (!ua === true && ratio >= 2) {
-    //     abc.css('height', 0)
-    // }
+    //获取设备宽高
+    var heightc = window.screen.height
+    var widthc = window.screen.width
+    console.log({
+        heightc
+    }, {
+        widthc
+    })
+    // 获取是否微信
+    var ua = /MicroMessenger/.test(navigator.userAgent)
+    //计算长宽比保留1位小数
+    var ratio = (heightc / widthc).toFixed(1)
+    //获取htmlfont-size
+    var htmlFont = $('html').css('font-size').match(/^\d+.\d/)[0]
+    //64px
+    var heightR = 64 / htmlFont
+    var heightA = 210 / htmlFont
+    console.log(heightR)
+    var abc = $('.abc')
+    var appTr = $('#app')
+    if (ua === true && heightc > 720) {
+        console.log('是微信')
+        abc.css('height', heightR + 'rem')
+    } else if (ua === true && heightc < 720) {
+        console.log('是微信小于720')
+        appTr.css('transform', `translateY(-${heightA}rem)`)
+    } else if (ua !== true && ratio >= 2) {
+        console.log('不是微信全面屏')
+        abc.css('height', 0)
+    } else if (ua !== true && ratio < 2) {
+        console.log('不是微信16:9')
+        appTr.css('transform', `translateY(-${heightA}rem)`)
+    }
+
     var $loading = $("#J-loading");
     var $progress = $("#J-progress-text");
     var prg = 0;
