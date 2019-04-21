@@ -21,16 +21,16 @@
     var appTr = $('#app')
     if (ua === true && heightc > 720) {
         console.log('是微信')
-        abc.css('height', heightR + 'rem')
+        // abc.css('height', heightR + 'rem')
     } else if (ua === true && heightc < 720) {
         console.log('是微信小于720')
-        appTr.css('transform', `translateY(-${heightA}rem)`)
+        appTr.css('transform', `translateY(-${heightR}rem)`)
     } else if (ua !== true && ratio >= 2) {
         console.log('不是微信全面屏')
         abc.css('height', 0)
     } else if (ua !== true && ratio < 2) {
         console.log('不是微信16:9')
-        appTr.css('transform', `translateY(-${heightA}rem)`)
+        // appTr.css('transform', `translateY(-${heightA}rem)`)
     }
 
     var $loading = $("#J-loading");
