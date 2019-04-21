@@ -10,8 +10,6 @@
 body {
     margin-bottom: constant(safe-area-inset-bottom);
     margin-bottom: env(safe-area-inset-bottom);
-    -webkit-transform: translateY(-1.7066667rem);
-            transform: translateY(-1.7066667rem)
 }
 
 .swiper-container {
@@ -23,7 +21,7 @@ body {
 .money {
     position: absolute;
     /* top: 10.053333rem; */
-    top: .8rem;
+    top: .8rem; 
     left: 7.386667rem;
     width: 1.706667rem;
     height: 2.106667rem;
