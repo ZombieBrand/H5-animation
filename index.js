@@ -122,7 +122,7 @@
             });
         }
 
-        money.css("transform", `translate3d(0px,${dY}px,0px)`);
+        money.css("transform", `translate3d(0px,${dY/37.5}rem,0px)`);
 
         if (dY > 320 && ev.deltaY < 0) {
             clearTimeout(time);
@@ -200,15 +200,15 @@
                         this.allowSlideNext = false;
                         this.allowSlidePrev = true;
                         talk2.fadeIn('fast').css({
-                            'transform': 'translate3d(0px,650px,0px)',
+                            'transform': 'translate3d(0px,17.3333rem,0px)',
                             'transition': 'transform 2s'
                         });
                         line.fadeIn('fast').css({
-                            'transform': 'translate3d(0px,586px,0px)',
+                            'transform': 'translate3d(0px,15.62666rem,0px)',
                             'transition': 'transform 1s'
                         });
                         person2.fadeIn('fast').css({
-                            'transform': 'translate3d(0px,830px,0px) rotate(1turn)',
+                            'transform': 'translate3d(0px,22.13333rem,0px) rotate(1turn)',
                             'transition': 'transform 2s'
                         });
                         setTimeout(function () {
