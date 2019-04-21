@@ -12,11 +12,11 @@
     //计算长宽比保留1位小数
     var ratio = (heightc / widthc).toFixed(1)
     //获取htmlfont-size
-    var htmlFont = $('html').css('font-size').match(/^\d+.\d/)[0]
+    var htmlFont = $('html').css('font-size').match(/^\d+.\d/)?$('html').css('font-size').match(/^\d+.\d/)[0]:null;
     //64px
     var heightR = 64 / htmlFont
-    var heightA = 210 / htmlFont
-    console.log(heightR)
+    // var heightA = 210 / htmlFont
+    console.log(htmlFont)
     var abc = $('.abc')
     var appTr = $('#app')
     if (ua === true && heightc > 720) {
@@ -30,7 +30,7 @@
         abc.css('height', 0)
     } else if (ua !== true && ratio < 2) {
         console.log('不是微信16:9')
-        // appTr.css('transform', `translateY(-${heightA}rem)`)
+        appTr.css('transform', `translateY(-${heightR}rem)`)
     }
 
     var $loading = $("#J-loading");
