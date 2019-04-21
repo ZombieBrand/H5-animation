@@ -1,15 +1,16 @@
 !(function () {
     var heightc = window.screen.height
     var widthc = window.screen.width
-    var ua = navigator.userAgent
-    if (ua.match(/MicroMessenger/i) === 'micromessenger') {
-        console.log('微信')
+    var ratio =(heightc/widthc).toFixed(1)
+    var htmlFont = $('html').css('font-size').match(/^\d+.\d/)[0]
+    var heightR = 64/htmlFont
+    console.log(heightR)
+    var abc = $('.abc')
+    if(ratio >= 2){
+        abc.css('height',heightR+'rem')
+    }else{
+        abc.css('height',0)
     }
-    console.log({
-        heightc
-    }, {
-        widthc
-    })
     /* 样式兼容 */
     // document.body.style.overflow = 'hidden'
     var $loading = $("#J-loading");

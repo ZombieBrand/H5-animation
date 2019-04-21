@@ -10,6 +10,12 @@
 body {
     margin-bottom: constant(safe-area-inset-bottom);
     margin-bottom: env(safe-area-inset-bottom);
+    height:16.186667rem;
+    width:10rem;
+}
+.abc{
+    height:3.9rem;
+    width:100%;
 }
 
 .swiper-container {
